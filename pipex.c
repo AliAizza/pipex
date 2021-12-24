@@ -14,7 +14,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "split.c"
+#include "pipex.h"
 
 int	ft_strlen(char *str)
 {
@@ -95,27 +95,15 @@ char	*ft_get_path(char *command, char **env)
 	return (NULL);
 }
 
-void	child_process(int fd1, char *cmd1)
-{
-	dup2(fd1, 0);
-	
-}
-
-void	pipex(int fd1, int fd2, char *cmd1, char *cmd2)
-{
-	int		p[2];
-	pid_t	f;
-
-	pipe(p);
-	f = fork();
-	if (f < 0)
-		return(perror("Error"));
-	else if (f == 0)
-		child_process(fd1, cmd1);
-	else
-		parent_process(fd2, cmd2);
-}
-
 int main(int argc, char **argv, char **env)
 {
+	int	p[2];
+	int	pid;
+
+	pipe(p);
+	pid = fork();
+	if (pid == 0)
+		child_process(argv, env, p);
+	else
+		parent_process(argv, env, p);
 }
