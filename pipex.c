@@ -99,11 +99,15 @@ int main(int argc, char **argv, char **env)
 {
 	int	p[2];
 	int	pid;
+	int	fd1;
+	int	fd2;
 
 	pipe(p);
 	pid = fork();
+	fd1 = open(argv[1], O_RDONLY);
+	fd2 = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (pid == 0)
-		child_process(argv, env, p);
+		child_process(argv, env, p, fd1);
 	else
-		parent_process(argv, env, p);
+		parent_process(argv, env, p, fd2);
 }
