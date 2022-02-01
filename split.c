@@ -6,11 +6,11 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 00:55:46 by aaizza            #+#    #+#             */
-/*   Updated: 2021/12/24 01:01:26 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/01/31 11:17:02 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "pipex.h"
 
 static int	ft_issep(char i, char c)
 {

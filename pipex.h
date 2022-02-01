@@ -1,8 +1,24 @@
-#ifndef PIPEX_h
-#define PIPEX_h
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/31 11:16:46 by aaizza            #+#    #+#             */
+/*   Updated: 2022/01/31 11:17:34 by aaizza           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/wait.h>
+#ifndef PIPEX_H
+# define PIPEX_H
+
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 char	**ft_split(char *s, char c);
 void	child_process(char **argv, char **env, int *p, int fd);
