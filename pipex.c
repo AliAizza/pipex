@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 22:32:34 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/01 12:02:35 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/07 22:27:01 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ int	main(int argc, char **argv, char **env)
 	pid = fork();
 	fd1 = open(argv[1], O_RDONLY);
 	fd2 = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-	system("leaks pipex");
+	if (pid == -1 || argc != 5)
+	{
+		perror("./pipex");
+		return (1);
+	}
 	if (pid == 0)
 		child_process(argv, env, p, fd1);
 	else
