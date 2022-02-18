@@ -6,45 +6,11 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:13:18 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/01 12:04:25 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/16 16:30:47 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	ft_strlen(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*s;
-	int		i;
-	int		j;
-
-	if (!s1 || !s2)
-		return (NULL);
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	s = malloc((i + j + 1) * sizeof(char));
-	if (!s)
-		return (NULL);
-	i = -1;
-	j = 0;
-	while (s1[++i])
-		s[i] = s1[i];
-	while (s2[j])
-		s[i++] = s2[j++];
-	s[i] = '\0';
-	free(s1);
-	return (s);
-}
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
