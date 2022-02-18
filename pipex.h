@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:16:46 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 03:58:51 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/18 04:05:34 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		compare_strings(char *s1, char *s2);
 void	get_commands(t_command *cmd, char **argv, char **env, int size);
 int		open_file(char *path);
 void	read_form_stdout(char *limit, int fd);
-void	handle_input(t_command *cmd, char *input, char *limit);
+void	handle_input(t_command *cmd, char *input);
 char	*ft_substr(char *s, int start, int len);
 int		ft_checkline(char *s);
 

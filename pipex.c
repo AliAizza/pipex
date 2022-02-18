@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 22:32:34 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 03:56:00 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/18 04:07:05 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	dup_all(t_command *cmd, char **argv, int i, int size)
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
 		k = 3;
 	if (i == 0)
-		handle_input(cmd, argv[1], argv[2]);
+		handle_input(cmd, argv[1]);
 	else if (i == size - 1)
 	{
 		fd = open(argv[size + k], O_RDWR | O_CREAT, 0777);
@@ -67,8 +67,11 @@ void	wait_all_child_processors(t_command *cmd, int size)
 	}
 }
 
-int	ft_norm(char **argv, int argc, int size, int fd)
+int	ft_norm(char **argv, int argc)
 {
+	int	size;
+	int	fd;
+
 	if (compare_strings(argv[1], "here_doc"))
 	{
 		fd = open("/tmp/.temp", O_RDWR | O_CREAT | O_TRUNC, 0777);
@@ -85,24 +88,22 @@ int	main(int argc, char **argv, char **env)
 {
 	int			size;
 	t_command	*cmd;
-	t_data		data;
-	char		*str;
-	int			fd;
+	int			i;
 
-	size = ft_norm(argv, argc, size, fd);
+	size = ft_norm(argv, argc);
 	cmd = malloc((size) * sizeof(t_command));
 	get_commands(cmd, argv, env, size);
-	fd = 0;
-	while (fd < size)
+	i = 0;
+	while (i < size)
 	{
 		cmd->pid = fork();
 		if (cmd->pid == 0)
 		{
-			close_unused_pipes(cmd, fd, size);
-			dup_all(cmd, argv, fd, size);
-			if (execve(cmd[fd].path, cmd[fd].args, env) == -1)
+			close_unused_pipes(cmd, i, size);
+			dup_all(cmd, argv, i, size);
+			if (execve(cmd[i].path, cmd[i].args, env) == -1)
 				exit(1);
 		}
-		fd++;
+		i++;
 	}
 }

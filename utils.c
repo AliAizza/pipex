@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 01:24:52 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 03:59:36 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/18 04:05:15 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	read_form_stdout(char *limit, int fd)
 	}
 }
 
-void	handle_input(t_command *cmd, char *input, char *limit)
+void	handle_input(t_command *cmd, char *input)
 {
 	int	fd;
 
