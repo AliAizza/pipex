@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 01:22:25 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 01:22:45 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/23 22:33:41 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (j < b)
 		new[i++] = s2[j++];
 	new[i] = '\0';
+	//free(s1);
 	return (new);
 }
 

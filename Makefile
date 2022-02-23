@@ -6,11 +6,11 @@
 #    By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/18 01:21:26 by aaizza            #+#    #+#              #
-#    Updated: 2022/02/18 04:01:59 by aaizza           ###   ########.fr        #
+#    Updated: 2022/02/20 20:22:54 by aaizza           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC= get_next_line.c get_next_line_utils.c path.c pipex.c process.c split.c utils.c
+SRC= get_next_line.c get_next_line_utils.c path.c pipex.c split.c utils.c
 
 NAME= pipex
 

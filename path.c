@@ -6,11 +6,23 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:13:18 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/16 16:30:47 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/23 22:39:53 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+}
 
 int	ft_strncmp(char *s1, char *s2, int n)
 {
@@ -43,17 +55,21 @@ char	*ft_get_path(char *command, char **env)
 	int		i;
 	char	*path;
 	char	**paths;
+	char	*r;
 
 	path = ft_find_path(env);
 	paths = ft_split(path, ':');
 	i = 0;
 	while (paths[i])
 	{
-		paths[i] = ft_strjoin(paths[i], "/");
-		paths[i] = ft_strjoin(paths[i], command);
-		if (access(paths[i], F_OK) == 0)
-			return (paths[i]);
+		path = ft_strjoin(paths[i], "/");
+		free(paths[i]);
+		r = ft_strjoin(path, command);
+		free(path);
+		if (access(r, F_OK) == 0)
+			return (r);
 		i++;
+		free(r);
 	}
 	return (NULL);
 }

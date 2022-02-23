@@ -6,11 +6,57 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 22:32:34 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 04:07:05 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/23 22:40:41 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+char	*ft_strchr(const char *str, int c)
+{
+	int		i;
+	char	*new;
+
+	new = (char *)str;
+	i = 0;
+	while (new[i])
+	{
+		if (new[i] == ((char)c))
+			return (&new[i]);
+		i++;
+	}
+	if (new[i] == (char)c)
+		return (&new[i]);
+	return (0);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
+void	check_path(t_command *cmd, int i)
+{
+	if (!cmd[i].path)
+	{
+		if (ft_strchr(cmd[i].args[0], '/'))
+			cmd[i].path = cmd[i].args[0];
+		else
+		{
+			ft_putstr_fd("./pipex: command not found\n", 2);
+			exit(1);
+		}
+	}
+}
 
 void	dup_all(t_command *cmd, char **argv, int i, int size)
 {
@@ -24,7 +70,10 @@ void	dup_all(t_command *cmd, char **argv, int i, int size)
 		handle_input(cmd, argv[1]);
 	else if (i == size - 1)
 	{
-		fd = open(argv[size + k], O_RDWR | O_CREAT, 0777);
+		if (!compare_strings(argv[1], "here_doc"))
+			fd = open(argv[size + k], O_CREAT | O_RDWR | O_TRUNC, 0664);
+		else
+			fd = open(argv[size + k], O_RDWR | O_CREAT | O_APPEND, 0664);
 		if (fd < 0)
 		{
 			perror("Error: ");
@@ -55,18 +104,6 @@ void	close_unused_pipes(t_command *cmd, int process_index, int size)
 	}
 }
 
-void	wait_all_child_processors(t_command *cmd, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		waitpid(cmd[i].pid, 0, 0);
-		i++;
-	}
-}
-
 int	ft_norm(char **argv, int argc)
 {
 	int	size;
@@ -82,6 +119,31 @@ int	ft_norm(char **argv, int argc)
 	else
 		size = argc - 3;
 	return (size);
+}
+
+void	wait_all_child_processors(t_command *cmd, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		waitpid(cmd[i].pid, 0, 0);
+		i++;
+	}
+}
+
+void	close_all_pipes(t_command *cmd, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		close(cmd[i].p[0]);
+		close(cmd[i].p[1]);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv, char **env)
@@ -101,9 +163,14 @@ int	main(int argc, char **argv, char **env)
 		{
 			close_unused_pipes(cmd, i, size);
 			dup_all(cmd, argv, i, size);
+			check_path(cmd, i);
+			while(1);
 			if (execve(cmd[i].path, cmd[i].args, env) == -1)
-				exit(1);
+				perror("./pipex");	
+			exit(1);
 		}
 		i++;
 	}
+	close_all_pipes(cmd, size);
+	wait_all_child_processors(cmd, size);
 }

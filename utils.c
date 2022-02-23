@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 01:24:52 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 04:05:15 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/23 22:12:31 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,10 @@ void	get_commands(t_command *cmd, char **argv, char **env, int size)
 		argv += 2;
 	while (i < size)
 	{
+		cmd[i].path = NULL;
 		pipe(cmd[i].p);
 		cmd[i].args = ft_split(argv[i], ' ');
 		cmd[i].path = ft_get_path(cmd[i].args[0], env);
-		if (access(cmd[i].path, F_OK) != 0)
-		{
-			ft_putstr("./pipex: command not found: ");
-			ft_putstr(cmd[i].args[0]);
-			ft_putstr("\n");
-		}
 		i++;
 	}
 }
