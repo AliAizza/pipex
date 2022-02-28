@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:16:46 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 04:05:34 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/28 22:41:05 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,10 @@ typedef struct s_command
 	int		p[2];
 }	t_command;
 
-typedef struct s_data {
-	char	**arr;
-	char	*input;
-	char	*output;
-	char	*limit;
-	int		p[2];
-	int		size;
-}	t_data;
-
 char	**ft_split(char *s, char c);
+void	close_all_pipes(t_command *cmd, int size);
+void	wait_all_child_processors(t_command *cmd, int size);
+void	check_path(t_command *cmd, int i);
 char	*ft_strjoin(char *s1, char *s2);
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);

@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:13:18 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/23 22:39:53 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/02/28 22:32:09 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,12 @@ char	*ft_get_path(char *command, char **env)
 		r = ft_strjoin(path, command);
 		free(path);
 		if (access(r, F_OK) == 0)
+		{
+			while (paths[++i])
+				free(paths[i]);
+			free(paths);
 			return (r);
+		}
 		i++;
 		free(r);
 	}
