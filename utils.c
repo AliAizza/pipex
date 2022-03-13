@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 01:24:52 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/23 22:12:31 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/03/12 22:23:45 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	get_commands(t_command *cmd, char **argv, char **env, int size)
 		argv += 2;
 	while (i < size)
 	{
-		cmd[i].path = NULL;
 		pipe(cmd[i].p);
 		cmd[i].args = ft_split(argv[i], ' ');
 		cmd[i].path = ft_get_path(cmd[i].args[0], env);
@@ -65,8 +64,11 @@ void	read_form_stdout(char *limit, int fd)
 	while (ft_strncmp(limit, line, ft_strlen(line)))
 	{
 		write(fd, line, ft_strlen(line));
+		free(line);
 		line = get_next_line(1);
 	}
+	free(line);
+	free(limit);
 }
 
 void	handle_input(t_command *cmd, char *input)

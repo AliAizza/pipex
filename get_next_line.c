@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 01:21:19 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/18 01:23:00 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/03/12 22:21:40 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_read_line(int fd, char *s)
 			return (NULL);
 		}
 		str[i] = '\0';
-		s = ft_strjoin(s, str);
+		s = ft_strjoin2(s, str);
 	}
 	free (str);
 	return (s);

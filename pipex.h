@@ -6,7 +6,7 @@
 /*   By: aaizza <aaizza@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:16:46 by aaizza            #+#    #+#             */
-/*   Updated: 2022/02/28 22:41:05 by aaizza           ###   ########.fr       */
+/*   Updated: 2022/03/12 22:21:58 by aaizza           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	close_all_pipes(t_command *cmd, int size);
 void	wait_all_child_processors(t_command *cmd, int size);
 void	check_path(t_command *cmd, int i);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin2(char *s1, char *s2);
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
 int		ft_strncmp(char *s1, char *s2, int n);
